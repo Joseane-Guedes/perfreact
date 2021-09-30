@@ -12,7 +12,7 @@ import { ProductItem } from "./ProductItem";
 export function SearchResults ({results}: SearchResultsProps) {
     return (
         <div>
-            {results.map((product) => {
+            {results.map(product => {
                 return (
                     <ProductItem product={product} />
                 );
@@ -27,3 +27,10 @@ export function SearchResults ({results}: SearchResultsProps) {
  * 2. Comparar com a versão anterior;
  * 3. Se ha alterações, vai atualizar o que alterou;
  */
+
+/* Aplicações do memo:
+* 1 - Pure functional Components <==> Funções puras são basicamente funções que dados os mesmos paramentros sempre retornam o mesmo resultado.
+* 2 - Renders too often 
+* 3 - Re-renders with same props
+* 4 - Components with medium to big size
+*/
