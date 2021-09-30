@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-key */
+import { useMemo } from "react";
 import { ProductItem } from "./ProductItem";
 
     interface SearchResultsProps {
@@ -8,10 +9,21 @@ import { ProductItem } from "./ProductItem";
           title: string;
         }>
 }
+//igualdade referencial
+
 
 export function SearchResults ({results}: SearchResultsProps) {
+    const totalPrice = useMemo(() => {
+        return results.reduce((total, product) => {
+            return total + product.price;
+        }, 0)
+     }, [results])
+
+
     return (
         <div>
+        <h2>{totalPrice}</h2>
+        
             {results.map(product => {
                 return (
                     <ProductItem product={product} />
@@ -33,4 +45,11 @@ export function SearchResults ({results}: SearchResultsProps) {
 * 2 - Renders too often 
 * 3 - Re-renders with same props
 * 4 - Components with medium to big size
+*/
+
+/* UseMemo  / UseCallback
+Evitar que alguma coisa que ocupe muito processamento seja refeito toda vez que o mesmo componente renderizar.
+1 - Calculos pesados;
+2 - Igualdade referencial - quando repassada a info para componente filho;
+3 -
 */
