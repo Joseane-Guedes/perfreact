@@ -1,5 +1,4 @@
-import { memo } from 'react'
-
+import { memo } from "react";
 
 interface ProductItemProps {
   product: {
@@ -7,23 +6,32 @@ interface ProductItemProps {
     price: number;
     title: string;
   };
+  onAddToWishlist: (id: number) => void;
 }
+
+
+export function ProductItemComponent({
+  product,
+  onAddToWishlist,
+}: ProductItemProps) {
+  return (
+    <div>
+      {product.title} - <strong>{product.price}</strong>
+      <button onClick={() => onAddToWishlist(product.id)}>
+        Add to wishlist
+      </button>
+    </div>
+  );
+}
+
+export const ProductItem = memo(
+  ProductItemComponent,
+  (prevProps, nextProps) => {
+    return Object.is(prevProps.product, nextProps.product);
+  }
+);
+
 //- Memo realiza as seguintes comparações:
 //shallow compare => comparação rasa
 //{} === {} => false
 // igualdade referencial
-
-
-export function ProductItemComponent({ product }: ProductItemProps ) {
-    return (
-        <div>
-            {product.title} - <strong>{product.price}</strong>
-        </div>
-    )
-}
-
-export const ProductItem =  memo(ProductItemComponent, (prevProps, nextProps) => {
-  return Object.is(prevProps.product, nextProps.product) 
-})
-
-
